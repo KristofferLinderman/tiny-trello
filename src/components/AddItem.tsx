@@ -2,6 +2,12 @@ import { useState } from "react";
 import styled from "styled-components";
 import { Item } from "../types";
 import { v4 as uuidv4 } from "uuid";
+import TextInput from "./TextInput";
+import Modal from "./Modal";
+
+type AddItemProps = {
+  onItemAdd: (item: Item) => void;
+};
 
 const Container = styled.div`
   display: flex;
@@ -10,27 +16,12 @@ const Container = styled.div`
   cursor: pointer;
 `;
 
-const ModalContainer = styled.div`
-  width: 50vw;
-  height: 50vh;
-  background-color: white;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border: 2px solid #000;
-  padding: 2rem;
-`;
-
-type AddItemProps = {
-  onItemAdd: (item: Item) => void;
-};
-
 const AddItem = ({ onItemAdd }: AddItemProps) => {
   const [showModal, setShowModal] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
+  //Todo add validation 😅
   const addTask = () => {
     const newItem: Item = {
       title,
@@ -38,7 +29,12 @@ const AddItem = ({ onItemAdd }: AddItemProps) => {
       date: new Date(),
       id: uuidv4(),
     };
+
     onItemAdd(newItem);
+    reset();
+  };
+
+  const reset = () => {
     setTitle("");
     setDescription("");
     setShowModal(false);
@@ -47,24 +43,24 @@ const AddItem = ({ onItemAdd }: AddItemProps) => {
   return (
     <Container>
       <button onClick={() => setShowModal(true)}>+ Add Item</button>
-      {showModal && (
-        <ModalContainer>
-          <h1>Add item here:</h1>
-          <label htmlFor="title">Task title</label>
-          <input
-            id="title"
-            onChange={(e) => setTitle(e.target.value)}
-            value={title}
-          />
-          <label htmlFor="description">Task description</label>
-          <input
-            id="description"
-            onChange={(e) => setDescription(e.target.value)}
-            value={description}
-          />
-          <button onClick={addTask}>Add task</button>
-        </ModalContainer>
-      )}
+      <Modal
+        isOpen={showModal}
+        submitLabel={"Add task"}
+        onCancel={() => reset()}
+        onSubmit={() => addTask()}
+      >
+        <h1>Add Task</h1>
+        <TextInput
+          label="Task title"
+          onChange={(value) => setTitle(value)}
+          value={title}
+        />
+        <TextInput
+          label="Task description"
+          onChange={(value) => setDescription(value)}
+          value={description}
+        />
+      </Modal>
     </Container>
   );
 };

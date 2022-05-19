@@ -5,7 +5,7 @@ import { useBoardContext } from "../context/BoardContext";
 const ListContainer = styled.div`
   display: flex;
   width: 100vw;
-  div {
+  + div {
     margin-right: 2rem;
   }
 `;
