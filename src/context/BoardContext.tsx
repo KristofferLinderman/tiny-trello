@@ -44,7 +44,20 @@ const BoardProvider = ({ children }: ProviderProps) => {
 
   const updateItem = (item: Item) => {};
 
-  const removeItem = (itemId: number, listId: number) => {};
+  const removeItem = (itemId: number, listId: number) => {
+    const newLists = lists.map((list) => {
+      if (list.id === listId) {
+        const newList = list;
+        newList.items = list.items.filter((item) => item.id !== itemId);
+
+        return newList;
+      }
+
+      return list;
+    });
+
+    setLists(newLists);
+  };
 
   return (
     <BoardContext.Provider

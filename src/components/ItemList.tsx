@@ -1,8 +1,7 @@
 import { ItemCard } from "./ItemCard";
 import styled from "styled-components";
-import AddItem from "./AddItem/AddItem";
+import AddItem from "./AddItem";
 import { Item, List } from "../types";
-import { useState } from "react";
 import { useBoardContext } from "../context/BoardContext";
 
 const Container = styled.div`
@@ -32,14 +31,17 @@ type ItemListProps = {
 };
 
 const ItemList = ({ list }: ItemListProps) => {
-  const { addItem } = useBoardContext();
-  const { title, id } = list;
-  const [items, setItems] = useState<Item[]>([]);
-  console.log("🚀 ~ file: ItemList.tsx ~ line 22 ~ ItemList ~ items", items);
+  const { addItem, removeItem } = useBoardContext();
+  const { title, id, items } = list;
 
-  const _addItem = (item: Item) => {
+  const onItemAdd = (item: Item) => {
     console.log("🐼 - Adding ", item);
     addItem(item, id);
+  };
+
+  const onItemRemove = (itemId: number) => {
+    console.log("🐼 - onItemRemove ", itemId);
+    removeItem(itemId, id);
   };
 
   return (
@@ -47,10 +49,10 @@ const ItemList = ({ list }: ItemListProps) => {
       <Title>{title}</Title>
       <ItemContainer>
         {items.map((item) => {
-          return <ItemCard key={item.id} item={item} />;
+          return <ItemCard key={item.id} item={item} onRemove={onItemRemove} />;
         })}
       </ItemContainer>
-      <AddItem onItemAdd={_addItem} />
+      <AddItem onItemAdd={onItemAdd} />
     </Container>
   );
 };
