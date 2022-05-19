@@ -47,6 +47,7 @@ type ModalProps = {
   onSubmit: () => void;
   submitLabel: string;
   cancelLabel?: string;
+  title: string;
 };
 
 const Modal = ({
@@ -56,6 +57,7 @@ const Modal = ({
   onSubmit,
   submitLabel,
   cancelLabel = "Cancel",
+  title,
 }: ModalProps) => {
   const handleOnCancel = () => {
     onCancel();
@@ -69,6 +71,7 @@ const Modal = ({
   return (
     <ModalWrapper>
       <ModalContainer>
+        <h1>{title}</h1>
         {children}
         <ButtonContainer>
           <Button onClick={handleOnCancel}>{cancelLabel}</Button>

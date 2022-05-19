@@ -48,8 +48,8 @@ const AddItem = ({ onItemAdd }: AddItemProps) => {
         submitLabel={"Add task"}
         onCancel={() => reset()}
         onSubmit={() => addTask()}
+        title={"Add Task"}
       >
-        <h1>Add Task</h1>
         <TextInput
           label="Task title"
           onChange={(value) => setTitle(value)}
