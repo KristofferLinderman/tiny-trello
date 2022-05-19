@@ -42,7 +42,26 @@ const BoardProvider = ({ children }: ProviderProps) => {
     setLists(newLists);
   };
 
-  const updateItem = (item: Item) => {};
+  const updateItem = (item: Item, listId: number) => {
+    const newLists = lists.map((list) => {
+      if (list.id === listId) {
+        const newList = list;
+
+        newList.items = list.items.map((_item) => {
+          if (_item.id === item.id) {
+            return item;
+          }
+          return _item;
+        });
+
+        return newList;
+      }
+
+      return list;
+    });
+
+    setLists(newLists);
+  };
 
   const removeItem = (itemId: number, listId: number) => {
     const newLists = lists.map((list) => {
