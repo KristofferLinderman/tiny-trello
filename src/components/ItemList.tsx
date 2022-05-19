@@ -1,8 +1,9 @@
 import { ItemCard } from "./ItemCard";
 import styled from "styled-components";
 import AddItem from "./AddItem/AddItem";
-import { Item, List } from "./types";
+import { Item, List } from "../types";
 import { useState } from "react";
+import { useBoardContext } from "../context/BoardContext";
 
 const Container = styled.div`
   display: flex;
@@ -31,13 +32,14 @@ type ItemListProps = {
 };
 
 const ItemList = ({ list }: ItemListProps) => {
-  const { title } = list;
+  const { addItem } = useBoardContext();
+  const { title, id } = list;
   const [items, setItems] = useState<Item[]>([]);
   console.log("🚀 ~ file: ItemList.tsx ~ line 22 ~ ItemList ~ items", items);
 
-  const addItem = (item: Item) => {
+  const _addItem = (item: Item) => {
     console.log("🐼 - Adding ", item);
-    setItems([...items, item]);
+    addItem(item, id);
   };
 
   return (
@@ -48,7 +50,7 @@ const ItemList = ({ list }: ItemListProps) => {
           return <ItemCard key={item.id} item={item} />;
         })}
       </ItemContainer>
-      <AddItem onItemAdd={addItem} />
+      <AddItem onItemAdd={_addItem} />
     </Container>
   );
 };

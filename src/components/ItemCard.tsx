@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Item } from "./types";
+import { Item } from "../types";
 
 const Container = styled.div`
   width: 100%;
