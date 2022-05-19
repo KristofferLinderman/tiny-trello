@@ -31,25 +31,50 @@ type ItemListProps = {
 };
 
 const ItemList = ({ list }: ItemListProps) => {
-  const { addItem, removeItem } = useBoardContext();
+  const { addItem, removeItem, updateItem, removeList, updateList } =
+    useBoardContext();
   const { title, id, items } = list;
+
+  const onRemoveList = () => {
+    removeList(list.id);
+  };
+
+  const onUpdateList = () => {
+    const newList = list;
+    newList.title = "Panda list";
+    updateList(newList);
+  };
 
   const onItemAdd = (item: Item) => {
     console.log("🐼 - Adding ", item);
     addItem(item, id);
   };
 
-  const onItemRemove = (itemId: number) => {
+  const onItemRemove = (itemId: string) => {
     console.log("🐼 - onItemRemove ", itemId);
     removeItem(itemId, id);
+  };
+
+  const onItemUpdate = (item: Item) => {
+    console.log("🐼 - onItemRemove ", item);
+    updateItem(item, id);
   };
 
   return (
     <Container>
       <Title>{title}</Title>
+      <button onClick={onRemoveList}>🗑</button>
+      <button onClick={onUpdateList}>✏️</button>
       <ItemContainer>
         {items.map((item) => {
-          return <ItemCard key={item.id} item={item} onRemove={onItemRemove} />;
+          return (
+            <ItemCard
+              key={item.id}
+              item={item}
+              onRemove={onItemRemove}
+              onUpdate={onItemUpdate}
+            />
+          );
         })}
       </ItemContainer>
       <AddItem onItemAdd={onItemAdd} />

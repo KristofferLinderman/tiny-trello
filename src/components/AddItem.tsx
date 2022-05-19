@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { Item } from "../types";
+import { v4 as uuidv4 } from "uuid";
 
 const Container = styled.div`
   display: flex;
@@ -35,7 +36,7 @@ const AddItem = ({ onItemAdd }: AddItemProps) => {
       title,
       description,
       date: new Date(),
-      id: Math.random() * Math.random() * 100,
+      id: uuidv4(),
     };
     onItemAdd(newItem);
     setTitle("");

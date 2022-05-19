@@ -1,4 +1,4 @@
-import React from "react";
+import { v4 as uuidv4 } from "uuid";
 import { useBoardContext } from "../context/BoardContext";
 import { List } from "../types";
 
@@ -10,7 +10,7 @@ const AddList = () => {
 
     const newList: List = {
       title: listTitle || `List #${lists.length + 1}`,
-      id: Math.random() * Math.random() * Math.random() * Math.random() * 100,
+      id: uuidv4(),
       items: [],
     };
 

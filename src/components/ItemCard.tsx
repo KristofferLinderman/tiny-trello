@@ -9,13 +9,17 @@ const Container = styled.div`
 
 type ItemCardProps = {
   item: Item;
-  onRemove: (itemId: number) => void;
+  onRemove: (itemId: string) => void;
+  onUpdate: (item: Item) => void;
 };
 
-const ItemCard = ({ item, onRemove }: ItemCardProps) => {
+const ItemCard = ({ item, onRemove, onUpdate }: ItemCardProps) => {
   const handleOnClick = () => {
     console.log("🐼 - Click");
-    onRemove(item.id);
+    // onRemove(item.id);
+    const newItem = item;
+    newItem.title = "Panda";
+    onUpdate(newItem);
   };
 
   return <Container onClick={handleOnClick}>{item.title}</Container>;

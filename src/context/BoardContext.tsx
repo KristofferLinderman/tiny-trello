@@ -5,10 +5,10 @@ const defaultValue: BoardContextType = {
   lists: [],
   addList: (list: List) => {},
   updateList: (list: List) => {},
-  removeList: (listId: number) => {},
-  addItem: (item: Item, listId: number) => {},
-  updateItem: (item: Item, listId: number) => {},
-  removeItem: (itemId: number, listId: number) => {},
+  removeList: (listId: string) => {},
+  addItem: (item: Item, listId: string) => {},
+  updateItem: (item: Item, listId: string) => {},
+  removeItem: (itemId: string, listId: string) => {},
 };
 
 const BoardContext = createContext<BoardContextType>(defaultValue);
@@ -36,13 +36,13 @@ const BoardProvider = ({ children }: ProviderProps) => {
     setLists(newLists);
   };
 
-  const removeList = (listId: number) => {
+  const removeList = (listId: string) => {
     const newLists = lists.filter((list) => list.id !== listId);
 
     setLists(newLists);
   };
 
-  const addItem = (item: Item, listId: number) => {
+  const addItem = (item: Item, listId: string) => {
     const newLists = lists.map((list) => {
       if (list.id === listId) {
         const newList = list;
@@ -56,7 +56,7 @@ const BoardProvider = ({ children }: ProviderProps) => {
     setLists(newLists);
   };
 
-  const updateItem = (item: Item, listId: number) => {
+  const updateItem = (item: Item, listId: string) => {
     const newLists = lists.map((list) => {
       if (list.id === listId) {
         const newList = list;
@@ -77,7 +77,7 @@ const BoardProvider = ({ children }: ProviderProps) => {
     setLists(newLists);
   };
 
-  const removeItem = (itemId: number, listId: number) => {
+  const removeItem = (itemId: string, listId: string) => {
     const newLists = lists.map((list) => {
       if (list.id === listId) {
         const newList = list;

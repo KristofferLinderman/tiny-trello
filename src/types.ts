@@ -2,13 +2,13 @@ export type Item = {
   title: string;
   description: string;
   date: Date;
-  id: number;
+  id: string;
 };
 
 export type List = {
   title: string;
   items: Item[];
-  id: number;
+  id: string;
 };
 
 export type BoardContextType = {
@@ -16,9 +16,9 @@ export type BoardContextType = {
 
   addList: (list: List) => void;
   updateList: (list: List) => void;
-  removeList: (listId: number) => void;
+  removeList: (listId: string) => void;
 
-  addItem: (item: Item, listId: number) => void;
-  updateItem: (item: Item, listId: number) => void;
-  removeItem: (itemId: number, listId: number) => void;
+  addItem: (item: Item, listId: string) => void;
+  updateItem: (item: Item, listId: string) => void;
+  removeItem: (itemId: string, listId: string) => void;
 };
