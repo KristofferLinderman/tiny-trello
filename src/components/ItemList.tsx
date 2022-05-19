@@ -21,7 +21,7 @@ const Title = styled.h2`
 const ItemContainer = styled.div`
   display: flex;
   flex-direction: column;
-  div {
+  > div {
     margin-bottom: 1rem;
   }
 `;
