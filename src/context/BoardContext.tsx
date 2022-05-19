@@ -26,7 +26,11 @@ const BoardProvider = ({ children }: ProviderProps) => {
 
   const updateList = (list: List) => {};
 
-  const removeList = (listId: number) => {};
+  const removeList = (listId: number) => {
+    const newLists = lists.filter((list) => list.id !== listId);
+
+    setLists(newLists);
+  };
 
   const addItem = (item: Item, listId: number) => {
     const newLists = lists.map((list) => {
