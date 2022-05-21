@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import AddList from "./components/AddList";
+import AddColumn from "./components/AddColumn/AddColumn";
 import { BoardProvider } from "./context/BoardContext";
-import ListView from "./views/ListView";
+import ColumnView from "./views/ColumnView";
 
 const Container = styled.div`
   padding: 2rem;
@@ -11,8 +11,8 @@ const App = () => {
   return (
     <Container>
       <BoardProvider>
-        <AddList />
-        <ListView />
+        <AddColumn />
+        <ColumnView />
       </BoardProvider>
     </Container>
   );

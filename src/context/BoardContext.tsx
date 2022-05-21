@@ -1,20 +1,20 @@
 import { createContext, useContext, useState } from "react";
-import { BoardContextType, Item, List } from "../types";
+import { BoardContextType, Task, Column } from "../types";
 
-const defaultLists: List[] = [
-  { title: "Todo", id: "0", items: [] },
-  { title: "In Progress", id: "1", items: [] },
-  { title: "Done", id: "2", items: [] },
+const defaultColumns: Column[] = [
+  { title: "Todo", id: "0", tasks: [] },
+  { title: "In Progress", id: "1", tasks: [] },
+  { title: "Done", id: "2", tasks: [] },
 ];
 
 const defaultValue: BoardContextType = {
-  lists: [],
-  addList: (list: List) => {},
-  updateList: (list: List) => {},
-  removeList: (listId: string) => {},
-  addItem: (item: Item, listId: string) => {},
-  updateItem: (item: Item, listId: string) => {},
-  removeItem: (itemId: string, listId: string) => {},
+  columns: [],
+  addColumn: (column: Column) => {},
+  updateColumn: (column: Column) => {},
+  removeColumn: (columnId: string) => {},
+  addTask: (task: Task, columnId: string) => {},
+  updateTask: (task: Task, columnId: string) => {},
+  removeTask: (taskId: string, columnId: string) => {},
 };
 
 const BoardContext = createContext<BoardContextType>(defaultValue);
@@ -24,103 +24,103 @@ type ProviderProps = {
 };
 
 const BoardProvider = ({ children }: ProviderProps) => {
-  const [lists, setLists] = useState<List[]>(defaultLists);
+  const [columns, setColumns] = useState<Column[]>(defaultColumns);
 
-  const addList = (list: List) => {
-    setLists([...lists, list]);
+  const addColumn = (column: Column) => {
+    setColumns([...columns, column]);
   };
 
-  const updateList = (list: List) => {
-    const newLists = lists.map((_list) => {
-      if (_list.id === list.id) {
-        return list;
+  const updateColumn = (column: Column) => {
+    const newColumns = columns.map((_column) => {
+      if (_column.id === column.id) {
+        return column;
       }
 
-      return _list;
+      return _column;
     });
 
-    setLists(newLists);
+    setColumns(newColumns);
   };
 
-  const removeList = (listId: string) => {
-    const newLists = lists.filter((list) => list.id !== listId);
+  const removeColumn = (columnId: string) => {
+    const newColumns = columns.filter((column) => column.id !== columnId);
 
-    setLists(newLists);
+    setColumns(newColumns);
   };
 
-  const addItem = (item: Item, listId: string) => {
-    console.log("🚀 ~ file: BoardContext.tsx ~ line 52 ~ addItem ~ item", item);
-    const newLists = lists.map((list) => {
-      if (list.id === listId) {
-        const newList = list;
-        newList.items = [...newList.items, item];
-        return newList;
+  const addTask = (task: Task, columnId: string) => {
+    console.log("🚀 ~ file: BoardContext.tsx ~ line 52 ~ addTask ~ task", task);
+    const newColumns = columns.map((column) => {
+      if (column.id === columnId) {
+        const newColumn = column;
+        newColumn.tasks = [...newColumn.tasks, task];
+        return newColumn;
       }
 
-      return list;
+      return column;
     });
 
     console.log(
-      "🚀 ~ file: BoardContext.tsx ~ line 64 ~ addItem ~ newLists",
-      newLists[0].items
+      "🚀 ~ file: BoardContext.tsx ~ line 64 ~ addTask ~ newColumns",
+      newColumns[0].tasks
     );
-    setLists(newLists);
+    setColumns(newColumns);
   };
 
-  const updateItem = (item: Item, listId: string) => {
+  const updateTask = (task: Task, columnId: string) => {
     console.log(
-      "🚀 ~ file: BoardContext.tsx ~ line 67 ~ updateItem ~ item",
-      item
+      "🚀 ~ file: BoardContext.tsx ~ line 67 ~ updateTask ~ task",
+      task
     );
-    const newLists = lists.map((list) => {
-      if (list.id === listId) {
-        const newList = list;
+    const newColumns = columns.map((column) => {
+      if (column.id === columnId) {
+        const newColumn = column;
 
-        newList.items = list.items.map((_item) => {
-          if (_item.id === item.id) {
-            return item;
+        newColumn.tasks = column.tasks.map((_task) => {
+          if (_task.id === task.id) {
+            return task;
           }
-          return _item;
+          return _task;
         });
 
-        return newList;
+        return newColumn;
       }
 
-      return list;
+      return column;
     });
 
     console.log(
-      "🚀 ~ file: BoardContext.tsx ~ line 90 ~ updateItem ~ newLists",
-      newLists[0].items
+      "🚀 ~ file: BoardContext.tsx ~ line 90 ~ updateTask ~ newColumns",
+      newColumns[0].tasks
     );
-    setLists(newLists);
+    setColumns(newColumns);
   };
 
-  const removeItem = (itemId: string, listId: string) => {
-    const newLists = lists.map((list) => {
-      if (list.id === listId) {
-        const newList = list;
-        newList.items = list.items.filter((item) => item.id !== itemId);
+  const removeTask = (taskId: string, columnId: string) => {
+    const newColumns = columns.map((column) => {
+      if (column.id === columnId) {
+        const newColumn = column;
+        newColumn.tasks = column.tasks.filter((task) => task.id !== taskId);
 
-        return newList;
+        return newColumn;
       }
 
-      return list;
+      return column;
     });
 
-    setLists(newLists);
+    setColumns(newColumns);
   };
 
   return (
     <BoardContext.Provider
       value={{
-        lists,
-        addList,
-        updateList,
-        removeList,
-        addItem,
-        updateItem,
-        removeItem,
+        columns,
+        addColumn,
+        updateColumn,
+        removeColumn,
+        addTask,
+        updateTask,
+        removeTask,
       }}
     >
       {children}

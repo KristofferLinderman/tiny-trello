@@ -1,24 +1,24 @@
-export type Item = {
+export type Task = {
   title: string;
   description: string;
   date: Date;
   id: string;
 };
 
-export type List = {
+export type Column = {
   title: string;
-  items: Item[];
+  tasks: Task[];
   id: string;
 };
 
 export type BoardContextType = {
-  lists: List[];
+  columns: Column[];
 
-  addList: (list: List) => void;
-  updateList: (list: List) => void;
-  removeList: (listId: string) => void;
+  addColumn: (column: Column) => void;
+  updateColumn: (column: Column) => void;
+  removeColumn: (columnId: string) => void;
 
-  addItem: (item: Item, listId: string) => void;
-  updateItem: (item: Item, listId: string) => void;
-  removeItem: (itemId: string, listId: string) => void;
+  addTask: (task: Task, columnId: string) => void;
+  updateTask: (task: Task, columnId: string) => void;
+  removeTask: (taskId: string, columnId: string) => void;
 };

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Item } from "../types";
+import { Task } from "../../types";
 
 const Container = styled.div`
   width: 100%;
@@ -27,26 +27,26 @@ const TinyButton = styled.button`
   cursor: pointer;
 `;
 
-type ItemCardProps = {
-  item: Item;
-  onRemove: (itemId: string) => void;
-  onUpdate: (item: Item) => void;
+type TaskCardProps = {
+  task: Task;
+  onRemove: (taskId: string) => void;
+  onUpdate: (task: Task) => void;
 };
 
-const ItemCard = ({ item, onRemove, onUpdate }: ItemCardProps) => {
+const TaskCard = ({ task, onRemove, onUpdate }: TaskCardProps) => {
   const handleEditClick = () => {
     console.log("🐼 - Clicked Edit");
-    onUpdate(item);
+    onUpdate(task);
   };
 
   const handleRemoveClick = () => {
     console.log("🐼 - Clicked");
-    onRemove(item.id);
+    onRemove(task.id);
   };
 
   return (
     <Container>
-      <Title>{item.title}</Title>
+      <Title>{task.title}</Title>
       <ButtonContainer>
         <TinyButton onClick={handleEditClick}>✏️</TinyButton>
         <TinyButton onClick={handleRemoveClick}>🗑</TinyButton>
@@ -55,4 +55,4 @@ const ItemCard = ({ item, onRemove, onUpdate }: ItemCardProps) => {
   );
 };
 
-export { ItemCard };
+export { TaskCard };

@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Item } from "../types";
+import { Task } from "../../types";
 import { v4 as uuidv4 } from "uuid";
-import TextInput from "./TextInput";
-import Modal from "./Modal";
+import Modal from "../common/Modal/Modal";
+import TextInput from "../common/Input/TextInput";
 
-type ItemModalProps = {
-  item: Item | null;
+type TaskModalProps = {
+  task: Task | null;
   isOpen: boolean;
   onCancel: () => void;
-  onSubmit: (item: Item) => void;
+  onSubmit: (task: Task) => void;
+  isEditMode: boolean;
 };
 
 const Container = styled.div`
@@ -19,7 +20,13 @@ const Container = styled.div`
   cursor: pointer;
 `;
 
-const ItemModal = ({ item, isOpen, onCancel, onSubmit }: ItemModalProps) => {
+const TaskModal = ({
+  task,
+  isOpen,
+  onCancel,
+  onSubmit,
+  isEditMode,
+}: TaskModalProps) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
@@ -29,23 +36,23 @@ const ItemModal = ({ item, isOpen, onCancel, onSubmit }: ItemModalProps) => {
   };
 
   useEffect(() => {
-    if (item) {
-      setTitle(item.title);
-      setDescription(item.description);
+    if (task) {
+      setTitle(task.title);
+      setDescription(task.description);
     }
-  }, [item]);
+  }, [task]);
 
   //Todo add validation 😅
   const handleSubmit = () => {
-    const newItem: Item = {
+    const newtask: Task = {
       title,
       description,
       date: new Date(),
-      id: item?.id || uuidv4(),
+      id: task?.id || uuidv4(),
     };
 
     reset();
-    onSubmit(newItem);
+    onSubmit(newtask);
   };
 
   const handleCancel = () => {
@@ -57,10 +64,10 @@ const ItemModal = ({ item, isOpen, onCancel, onSubmit }: ItemModalProps) => {
     <Container>
       <Modal
         isOpen={isOpen}
-        submitLabel={"Add task"}
+        submitLabel={isEditMode ? "Edit task" : "Add task"}
         onCancel={() => handleCancel()}
         onSubmit={() => handleSubmit()}
-        title={"Add Task"}
+        title={isEditMode ? "Edit task" : "Add Task"}
       >
         <TextInput
           label="Task title"
@@ -77,4 +84,4 @@ const ItemModal = ({ item, isOpen, onCancel, onSubmit }: ItemModalProps) => {
   );
 };
 
-export default ItemModal;
+export default TaskModal;
