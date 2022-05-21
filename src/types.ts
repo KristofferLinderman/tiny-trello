@@ -1,3 +1,6 @@
+import { Dispatch } from "react";
+import { BoardActions } from "./context/actions";
+
 export type Item = {
   title: string;
   description: string;
@@ -11,7 +14,7 @@ export type List = {
   id: string;
 };
 
-export type BoardContextType = {
+export type _BoardContextType = {
   lists: List[];
 
   addList: (list: List) => void;
@@ -21,4 +24,13 @@ export type BoardContextType = {
   addItem: (item: Item, listId: string) => void;
   updateItem: (item: Item, listId: string) => void;
   removeItem: (itemId: string, listId: string) => void;
+};
+
+export type BoardState = {
+  [key: string]: List;
+};
+
+export type BoardContextType = {
+  state: BoardState;
+  dispatch: Dispatch<BoardActions>;
 };
