@@ -1,31 +1,9 @@
 import { TaskCard } from "../TaskCard/TaskCard";
-import styled from "styled-components";
 import { Task, Column } from "../../types";
 import { useBoardContext } from "../../context/BoardContext";
 import { useState } from "react";
 import { TaskModal } from "../TaskModal";
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: #eee;
-  border-radius: 6px;
-  width: 20vw;
-  padding: 1rem;
-  height: 80vh;
-`;
-
-const Title = styled.h2`
-  font-size: 2rem;
-`;
-
-const TaskContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  > div {
-    margin-bottom: 1rem;
-  }
-`;
+import { Container, TaskContainer, Title } from "./ColumnContainer.style";
 
 type ColumnProps = {
   column: Column;
