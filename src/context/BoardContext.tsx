@@ -1,6 +1,12 @@
 import { createContext, useContext, useState } from "react";
 import { BoardContextType, Item, List } from "../types";
 
+const defaultLists: List[] = [
+  { title: "Todo", id: "0", items: [] },
+  { title: "In Progress", id: "1", items: [] },
+  { title: "Done", id: "2", items: [] },
+];
+
 const defaultValue: BoardContextType = {
   lists: [],
   addList: (list: List) => {},
@@ -18,7 +24,7 @@ type ProviderProps = {
 };
 
 const BoardProvider = ({ children }: ProviderProps) => {
-  const [lists, setLists] = useState<List[]>([]);
+  const [lists, setLists] = useState<List[]>(defaultLists);
 
   const addList = (list: List) => {
     setLists([...lists, list]);
@@ -43,6 +49,7 @@ const BoardProvider = ({ children }: ProviderProps) => {
   };
 
   const addItem = (item: Item, listId: string) => {
+    console.log("🚀 ~ file: BoardContext.tsx ~ line 52 ~ addItem ~ item", item);
     const newLists = lists.map((list) => {
       if (list.id === listId) {
         const newList = list;
@@ -53,10 +60,18 @@ const BoardProvider = ({ children }: ProviderProps) => {
       return list;
     });
 
+    console.log(
+      "🚀 ~ file: BoardContext.tsx ~ line 64 ~ addItem ~ newLists",
+      newLists[0].items
+    );
     setLists(newLists);
   };
 
   const updateItem = (item: Item, listId: string) => {
+    console.log(
+      "🚀 ~ file: BoardContext.tsx ~ line 67 ~ updateItem ~ item",
+      item
+    );
     const newLists = lists.map((list) => {
       if (list.id === listId) {
         const newList = list;
@@ -74,6 +89,10 @@ const BoardProvider = ({ children }: ProviderProps) => {
       return list;
     });
 
+    console.log(
+      "🚀 ~ file: BoardContext.tsx ~ line 90 ~ updateItem ~ newLists",
+      newLists[0].items
+    );
     setLists(newLists);
   };
 
