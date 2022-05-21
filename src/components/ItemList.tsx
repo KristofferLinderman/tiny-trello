@@ -1,8 +1,10 @@
 import { ItemCard } from "./ItemCard";
 import styled from "styled-components";
-import AddItem from "./AddItem";
+import ItemModal from "./ItemModal";
 import { Item, List } from "../types";
 import { useBoardContext } from "../context/BoardContext";
+import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 const Container = styled.div`
   display: flex;
@@ -31,9 +33,13 @@ type ItemListProps = {
 };
 
 const ItemList = ({ list }: ItemListProps) => {
+  const [selectedItem, setSelectedItem] = useState<Item | null>(null);
+  const [showItemModal, setShowItemModal] = useState(false);
   const { addItem, removeItem, updateItem, removeList, updateList } =
     useBoardContext();
+
   const { title, id, items } = list;
+  const isUpdatingItem = selectedItem !== null;
 
   const onRemoveList = () => {
     removeList(list.id);
@@ -45,19 +51,30 @@ const ItemList = ({ list }: ItemListProps) => {
     updateList(newList);
   };
 
-  const onItemAdd = (item: Item) => {
-    console.log("🐼 - Adding ", item);
-    addItem(item, id);
-  };
-
   const onItemRemove = (itemId: string) => {
     console.log("🐼 - onItemRemove ", itemId);
     removeItem(itemId, id);
   };
 
   const onItemUpdate = (item: Item) => {
-    console.log("🐼 - onItemRemove ", item);
-    updateItem(item, id);
+    setShowItemModal(true);
+    setSelectedItem(item);
+  };
+
+  const handleItemSubmit = (item: Item) => {
+    setShowItemModal(false);
+    setSelectedItem(null);
+
+    if (isUpdatingItem) {
+      updateItem(item, id);
+    } else {
+      addItem(item, id);
+    }
+  };
+
+  const handleOnCancel = () => {
+    setShowItemModal(false);
+    setSelectedItem(null);
   };
 
   return (
@@ -77,7 +94,13 @@ const ItemList = ({ list }: ItemListProps) => {
           );
         })}
       </ItemContainer>
-      <AddItem onItemAdd={onItemAdd} />
+      <button onClick={() => setShowItemModal(true)}>+ Add Item</button>
+      <ItemModal
+        item={selectedItem}
+        isOpen={showItemModal}
+        onCancel={handleOnCancel}
+        onSubmit={handleItemSubmit}
+      />
     </Container>
   );
 };

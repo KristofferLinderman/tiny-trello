@@ -34,13 +34,6 @@ type ItemCardProps = {
 };
 
 const ItemCard = ({ item, onRemove, onUpdate }: ItemCardProps) => {
-  const handleOnClick = () => {
-    // onRemove(item.id);
-    const newItem = item;
-    newItem.title = "Panda";
-    onUpdate(newItem);
-  };
-
   const handleEditClick = () => {
     console.log("🐼 - Clicked Edit");
     onUpdate(item);
@@ -52,7 +45,7 @@ const ItemCard = ({ item, onRemove, onUpdate }: ItemCardProps) => {
   };
 
   return (
-    <Container onClick={handleOnClick}>
+    <Container>
       <Title>{item.title}</Title>
       <ButtonContainer>
         <TinyButton onClick={handleEditClick}>✏️</TinyButton>

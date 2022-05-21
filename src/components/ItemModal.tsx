@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Item } from "../types";
 import { v4 as uuidv4 } from "uuid";
 import TextInput from "./TextInput";
 import Modal from "./Modal";
 
-type AddItemProps = {
-  onItemAdd: (item: Item) => void;
+type ItemModalProps = {
+  item: Item | null;
+  isOpen: boolean;
+  onCancel: () => void;
+  onSubmit: (item: Item) => void;
 };
 
 const Container = styled.div`
@@ -16,38 +19,47 @@ const Container = styled.div`
   cursor: pointer;
 `;
 
-const AddItem = ({ onItemAdd }: AddItemProps) => {
-  const [showModal, setShowModal] = useState(false);
+const ItemModal = ({ item, isOpen, onCancel, onSubmit }: ItemModalProps) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-
-  //Todo add validation 😅
-  const addTask = () => {
-    const newItem: Item = {
-      title,
-      description,
-      date: new Date(),
-      id: uuidv4(),
-    };
-
-    onItemAdd(newItem);
-    reset();
-  };
 
   const reset = () => {
     setTitle("");
     setDescription("");
-    setShowModal(false);
+  };
+
+  useEffect(() => {
+    if (item) {
+      setTitle(item.title);
+      setDescription(item.description);
+    }
+  }, [item]);
+
+  //Todo add validation 😅
+  const handleSubmit = () => {
+    const newItem: Item = {
+      title,
+      description,
+      date: new Date(),
+      id: item?.id || uuidv4(),
+    };
+
+    reset();
+    onSubmit(newItem);
+  };
+
+  const handleCancel = () => {
+    reset();
+    onCancel();
   };
 
   return (
     <Container>
-      <button onClick={() => setShowModal(true)}>+ Add Item</button>
       <Modal
-        isOpen={showModal}
+        isOpen={isOpen}
         submitLabel={"Add task"}
-        onCancel={() => reset()}
-        onSubmit={() => addTask()}
+        onCancel={() => handleCancel()}
+        onSubmit={() => handleSubmit()}
         title={"Add Task"}
       >
         <TextInput
@@ -65,4 +77,4 @@ const AddItem = ({ onItemAdd }: AddItemProps) => {
   );
 };
 
-export default AddItem;
+export default ItemModal;
