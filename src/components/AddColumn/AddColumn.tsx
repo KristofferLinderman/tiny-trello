@@ -3,6 +3,7 @@ import { useBoardContext } from "../../context/BoardContext";
 import { useToggle } from "../../hooks/useToggle";
 import { Column } from "../../types";
 import { ColumnModal } from "../ColumnModal";
+import { Button, Container } from "./AddColumn.style";
 
 type AddColumnProps = {
   selectedColumn: Column | null; // TODO change name to columnToEdit? 🤔
@@ -38,8 +39,8 @@ const AddColumn = ({ selectedColumn, setSelectedColumn }: AddColumnProps) => {
   };
 
   return (
-    <div>
-      <button onClick={toggleModal}>Add column</button>
+    <Container>
+      <Button onClick={toggleModal}>+ Add Column</Button>
       <ColumnModal
         column={selectedColumn}
         isOpen={showModal}
@@ -47,7 +48,7 @@ const AddColumn = ({ selectedColumn, setSelectedColumn }: AddColumnProps) => {
         onSubmit={handleColumnSubmit}
         isEditMode={isEditingColumn}
       />
-    </div>
+    </Container>
   );
 };
 

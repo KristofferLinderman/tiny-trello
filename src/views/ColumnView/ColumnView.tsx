@@ -3,7 +3,7 @@ import { AddColumn } from "../../components/AddColumn";
 import { ColumnContainer } from "../../components/ColumnContainer";
 import { useBoardContext } from "../../context/BoardContext";
 import { Column } from "../../types";
-import { Container } from "./ColumnView.style";
+import { ComlumnWrapper, Container } from "./ColumnView.style";
 
 const ColumnView = () => {
   const [selectedColumn, setSelectedColumn] = useState<Column | null>(null);
@@ -19,15 +19,17 @@ const ColumnView = () => {
         selectedColumn={selectedColumn}
         setSelectedColumn={setSelectedColumn}
       />
-      {columns.map((column) => {
-        return (
-          <ColumnContainer
-            onUpdateColumn={(column) => onUpdateColumn(column)}
-            key={column.id}
-            column={column}
-          />
-        );
-      })}
+      <ComlumnWrapper>
+        {columns.map((column) => {
+          return (
+            <ColumnContainer
+              onUpdateColumn={(column) => onUpdateColumn(column)}
+              key={column.id}
+              column={column}
+            />
+          );
+        })}
+      </ComlumnWrapper>
     </Container>
   );
 };
