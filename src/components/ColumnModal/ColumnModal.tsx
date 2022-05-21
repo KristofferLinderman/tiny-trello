@@ -36,7 +36,7 @@ const ColumnModal = ({
     const newColumn: Column = {
       title,
       id: column?.id || uuidv4(),
-      tasks: [],
+      tasks: column?.tasks || [],
     };
 
     reset();

@@ -14,6 +14,7 @@ const TextInput = ({ label, onChange, value }: Props) => {
         id={label}
         onChange={(e) => onChange(e.target.value)}
         value={value}
+        autoComplete={"off"}
       />
     </Container>
   );
