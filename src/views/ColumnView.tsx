@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ColumnContainer } from "../components/Column/Column";
+import { ColumnContainer } from "../components/ColumnContainer";
 import { useBoardContext } from "../context/BoardContext";
 
 const Container = styled.div`

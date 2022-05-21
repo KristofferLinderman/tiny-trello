@@ -23,4 +23,4 @@ const AddColumn = () => {
   );
 };
 
-export default AddColumn;
+export { AddColumn };

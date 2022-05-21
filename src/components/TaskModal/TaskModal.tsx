@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Task } from "../../types";
 import { v4 as uuidv4 } from "uuid";
-import Modal from "../common/Modal/Modal";
-import TextInput from "../common/Input/TextInput";
+import { TextInput } from "../common/Input";
+import { Modal } from "../common/Modal";
 
 type TaskModalProps = {
   task: Task | null;
@@ -84,4 +84,4 @@ const TaskModal = ({
   );
 };
 
-export default TaskModal;
+export { TaskModal };

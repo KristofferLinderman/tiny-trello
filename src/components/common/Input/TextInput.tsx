@@ -38,4 +38,4 @@ const TextInput = ({ label, onChange, value }: Props) => {
   );
 };
 
-export default TextInput;
+export { TextInput };

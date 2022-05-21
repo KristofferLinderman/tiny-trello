@@ -1,9 +1,9 @@
 import { TaskCard } from "../TaskCard/TaskCard";
 import styled from "styled-components";
-import TaskModal from "../TaskModal/TaskModal";
 import { Task, Column } from "../../types";
 import { useBoardContext } from "../../context/BoardContext";
 import { useState } from "react";
+import { TaskModal } from "../TaskModal";
 
 const Container = styled.div`
   display: flex;

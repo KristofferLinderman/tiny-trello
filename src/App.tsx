@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import AddColumn from "./components/AddColumn/AddColumn";
+import { AddColumn } from "./components/AddColumn";
 import { BoardProvider } from "./context/BoardContext";
 import ColumnView from "./views/ColumnView";
 
