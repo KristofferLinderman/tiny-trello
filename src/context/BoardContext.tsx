@@ -49,7 +49,6 @@ const BoardProvider = ({ children }: ProviderProps) => {
   };
 
   const addTask = (task: Task, columnId: string) => {
-    console.log("🚀 ~ file: BoardContext.tsx ~ line 52 ~ addTask ~ task", task);
     const newColumns = columns.map((column) => {
       if (column.id === columnId) {
         const newColumn = column;
@@ -60,18 +59,10 @@ const BoardProvider = ({ children }: ProviderProps) => {
       return column;
     });
 
-    console.log(
-      "🚀 ~ file: BoardContext.tsx ~ line 64 ~ addTask ~ newColumns",
-      newColumns[0].tasks
-    );
     setColumns(newColumns);
   };
 
   const updateTask = (task: Task, columnId: string) => {
-    console.log(
-      "🚀 ~ file: BoardContext.tsx ~ line 67 ~ updateTask ~ task",
-      task
-    );
     const newColumns = columns.map((column) => {
       if (column.id === columnId) {
         const newColumn = column;
@@ -89,10 +80,6 @@ const BoardProvider = ({ children }: ProviderProps) => {
       return column;
     });
 
-    console.log(
-      "🚀 ~ file: BoardContext.tsx ~ line 90 ~ updateTask ~ newColumns",
-      newColumns[0].tasks
-    );
     setColumns(newColumns);
   };
 

@@ -14,12 +14,10 @@ type TaskCardProps = {
 
 const TaskCard = ({ task, onRemove, onUpdate }: TaskCardProps) => {
   const handleEditClick = () => {
-    console.log("🐼 - Clicked Edit");
     onUpdate(task);
   };
 
   const handleRemoveClick = () => {
-    console.log("🐼 - Clicked");
     onRemove(task.id);
   };
 

@@ -29,7 +29,6 @@ const ColumnContainer = ({ column }: ColumnProps) => {
   };
 
   const onTaskRemove = (taskId: string) => {
-    console.log("🐼 - onTaskRemove ", taskId);
     removeTask(taskId, id);
   };
 
