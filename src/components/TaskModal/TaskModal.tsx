@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components";
 import { Task } from "../../types";
 import { v4 as uuidv4 } from "uuid";
 import { TextInput } from "../common/Input";
 import { Modal } from "../common/Modal";
+import { Container } from "./TaskModal.style";
 
 type TaskModalProps = {
   task: Task | null;
@@ -12,13 +12,6 @@ type TaskModalProps = {
   onSubmit: (task: Task) => void;
   isEditMode: boolean;
 };
-
-const Container = styled.div`
-  display: flex;
-  border: 1px solid #333;
-  border-radius: 4px;
-  cursor: pointer;
-`;
 
 const TaskModal = ({
   task,
@@ -42,7 +35,6 @@ const TaskModal = ({
     }
   }, [task]);
 
-  //Todo add validation 😅
   const handleSubmit = () => {
     const newtask: Task = {
       title,

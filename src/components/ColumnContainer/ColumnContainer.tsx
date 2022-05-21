@@ -7,25 +7,19 @@ import { Container, TaskContainer, Title } from "./ColumnContainer.style";
 
 type ColumnProps = {
   column: Column;
+  onUpdateColumn: (column: Column) => void;
 };
 
-const ColumnContainer = ({ column }: ColumnProps) => {
+const ColumnContainer = ({ column, onUpdateColumn }: ColumnProps) => {
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
   const [showTaskModal, setShowTaskModal] = useState(false);
-  const { addTask, removeTask, updateTask, removeColumn, updateColumn } =
-    useBoardContext();
+  const { addTask, removeTask, updateTask, removeColumn } = useBoardContext();
 
   const { title, id, tasks } = column;
   const isEditingTask = selectedTask !== null;
 
   const onRemoveColumn = () => {
     removeColumn(column.id);
-  };
-
-  const onUpdateColumn = () => {
-    const newColumn = column;
-    newColumn.title = "Panda column";
-    updateColumn(newColumn);
   };
 
   const onTaskRemove = (taskId: string) => {
@@ -57,7 +51,7 @@ const ColumnContainer = ({ column }: ColumnProps) => {
     <Container>
       <Title>{title}</Title>
       <button onClick={onRemoveColumn}>🗑</button>
-      <button onClick={onUpdateColumn}>✏️</button>
+      <button onClick={() => onUpdateColumn(column)}>✏️</button>
       <TaskContainer>
         {tasks.map((task) => {
           return (

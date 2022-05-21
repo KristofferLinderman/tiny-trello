@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { AddColumn } from "./components/AddColumn";
 import { BoardProvider } from "./context/BoardContext";
 import { ColumnView } from "./views/ColumnView";
 
@@ -11,7 +10,6 @@ const App = () => {
   return (
     <Container>
       <BoardProvider>
-        <AddColumn />
         <ColumnView />
       </BoardProvider>
     </Container>

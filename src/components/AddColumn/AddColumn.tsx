@@ -1,24 +1,52 @@
-import { v4 as uuidv4 } from "uuid";
+import { useEffect } from "react";
 import { useBoardContext } from "../../context/BoardContext";
+import { useToggle } from "../../hooks/useToggle";
 import { Column } from "../../types";
+import { ColumnModal } from "../ColumnModal";
 
-const AddColumn = () => {
-  const { columns, addColumn } = useBoardContext();
+type AddColumnProps = {
+  selectedColumn: Column | null; // TODO change name to columnToEdit? 🤔
+  setSelectedColumn: (column: Column | null) => void;
+};
 
-  const handleAddColumn = () => {
-    const columnTitle = prompt("Please enter column title");
+const AddColumn = ({ selectedColumn, setSelectedColumn }: AddColumnProps) => {
+  const { addColumn, updateColumn } = useBoardContext();
+  const [showModal, toggleModal] = useToggle();
 
-    const newColumn: Column = {
-      title: columnTitle || `Column #${columns.length + 1}`,
-      id: uuidv4(),
-      tasks: [],
-    };
+  const isEditingColumn = selectedColumn !== null;
 
-    addColumn(newColumn);
+  useEffect(() => {
+    if (selectedColumn && !showModal) {
+      toggleModal();
+    }
+  }, [selectedColumn, showModal, toggleModal]);
+
+  const handleColumnSubmit = (column: Column) => {
+    toggleModal();
+    setSelectedColumn(null);
+
+    if (isEditingColumn) {
+      updateColumn(column);
+    } else {
+      addColumn(column);
+    }
   };
+
+  const handleOnCancel = () => {
+    toggleModal();
+    setSelectedColumn(null);
+  };
+
   return (
     <div>
-      <button onClick={handleAddColumn}>Add column</button>
+      <button onClick={toggleModal}>Add column</button>
+      <ColumnModal
+        column={selectedColumn}
+        isOpen={showModal}
+        onCancel={handleOnCancel}
+        onSubmit={handleColumnSubmit}
+        isEditMode={isEditingColumn}
+      />
     </div>
   );
 };
