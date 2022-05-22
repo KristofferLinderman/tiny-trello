@@ -46,7 +46,6 @@ const AddColumn = ({ selectedColumn, setSelectedColumn }: AddColumnProps) => {
         isOpen={showModal}
         onCancel={handleOnCancel}
         onSubmit={handleColumnSubmit}
-        isEditMode={isEditingColumn}
       />
     </Container>
   );

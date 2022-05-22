@@ -10,7 +10,6 @@ type ColumnModalProps = {
   isOpen: boolean;
   onCancel: () => void;
   onSubmit: (column: Column) => void;
-  isEditMode: boolean;
 };
 
 const ColumnModal = ({
@@ -18,9 +17,9 @@ const ColumnModal = ({
   isOpen,
   onCancel,
   onSubmit,
-  isEditMode,
 }: ColumnModalProps) => {
   const [title, setTitle] = useState("");
+  const isEditMode = column !== null;
 
   const reset = () => {
     setTitle("");
@@ -33,6 +32,10 @@ const ColumnModal = ({
   }, [column]);
 
   const handleSubmit = () => {
+    if (title === "") {
+      alert("Columns require a name");
+      return;
+    }
     const newColumn: Column = {
       title,
       id: column?.id || uuidv4(),
