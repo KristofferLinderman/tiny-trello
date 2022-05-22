@@ -61,6 +61,7 @@ const TaskModal = ({ task, isOpen, onCancel, onSubmit }: TaskModalProps) => {
           onChange={(value) => setTitle(value)}
           value={title}
         />
+
         <TextInput
           label="Task description"
           onChange={(value) => setDescription(value)}

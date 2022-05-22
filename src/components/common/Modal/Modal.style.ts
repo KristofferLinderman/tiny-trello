@@ -27,15 +27,15 @@ export const ModalContainer = styled.div`
   box-sizing: border-box;
 `;
 
-export const Button = styled.button`
-  height: 3rem;
-  width: 6rem;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
-  margin-left: 1rem;
-`;
-
 export const ButtonContainer = styled.div`
   align-self: flex-end;
+  display: flex;
+  width: 70%;
+  justify-content: flex-end;
+
+  > button {
+    margin-left: 2rem;
+    width: 100%;
+    max-width: 150px;
+  }
 `;

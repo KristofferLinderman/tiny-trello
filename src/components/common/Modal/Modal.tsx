@@ -1,10 +1,6 @@
 import { ReactNode } from "react";
-import {
-  Button,
-  ButtonContainer,
-  ModalContainer,
-  ModalWrapper,
-} from "./Modal.style";
+import { Button } from "../Button";
+import { ButtonContainer, ModalContainer, ModalWrapper } from "./Modal.style";
 
 type ModalProps = {
   children: ReactNode;
