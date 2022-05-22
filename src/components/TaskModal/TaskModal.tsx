@@ -10,18 +10,13 @@ type TaskModalProps = {
   isOpen: boolean;
   onCancel: () => void;
   onSubmit: (task: Task) => void;
-  isEditMode: boolean;
 };
 
-const TaskModal = ({
-  task,
-  isOpen,
-  onCancel,
-  onSubmit,
-  isEditMode,
-}: TaskModalProps) => {
+const TaskModal = ({ task, isOpen, onCancel, onSubmit }: TaskModalProps) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+
+  const isEditMode = task !== null;
 
   const reset = () => {
     setTitle("");

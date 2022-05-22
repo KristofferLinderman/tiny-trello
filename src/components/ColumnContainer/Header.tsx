@@ -10,10 +10,6 @@ type HeaderProps = {
 
 const Header = ({ title, onUpdateColumn, onRemoveColumn }: HeaderProps) => {
   const [showButtons, toggle] = useToggle(false);
-  console.log(
-    "🚀 ~ file: Header.tsx ~ line 13 ~ Header ~ showButtons",
-    showButtons
-  );
 
   const handleHoverEnter = () => {
     toggle();
@@ -26,7 +22,6 @@ const Header = ({ title, onUpdateColumn, onRemoveColumn }: HeaderProps) => {
   return (
     <Container onMouseEnter={handleHoverEnter} onMouseLeave={handleHoverLeave}>
       <Title>{title}</Title>
-
       <ButtonContainer show={showButtons}>
         <TinyButton onClick={onUpdateColumn}>✏️</TinyButton>
         <TinyButton onClick={onRemoveColumn}>🗑</TinyButton>

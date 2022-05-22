@@ -2,10 +2,9 @@ import { TaskCard } from "../TaskCard/TaskCard";
 import { Task, Column } from "../../types";
 import { useBoardContext } from "../../context/BoardContext";
 import { useState } from "react";
-import { TaskModal } from "../TaskModal";
 import { Container, TaskContainer } from "./ColumnContainer.style";
-import { Button } from "../common/Button";
 import { Header } from "./Header";
+import { AddTask } from "../AddTask";
 
 type ColumnProps = {
   column: Column;
@@ -14,35 +13,16 @@ type ColumnProps = {
 
 const ColumnContainer = ({ column, onUpdateColumn }: ColumnProps) => {
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
-  const [showTaskModal, setShowTaskModal] = useState(false);
-  const { addTask, removeTask, updateTask, removeColumn } = useBoardContext();
+  const { removeTask, removeColumn } = useBoardContext();
 
   const { title, id, tasks } = column;
-  const isEditingTask = selectedTask !== null;
 
   const onTaskRemove = (taskId: string) => {
     removeTask(taskId, id);
   };
 
   const onTaskUpdate = (task: Task) => {
-    setShowTaskModal(true);
     setSelectedTask(task);
-  };
-
-  const handleTaskSubmit = (task: Task) => {
-    setShowTaskModal(false);
-    setSelectedTask(null);
-
-    if (isEditingTask) {
-      updateTask(task, id);
-    } else {
-      addTask(task, id);
-    }
-  };
-
-  const handleOnCancel = () => {
-    setShowTaskModal(false);
-    setSelectedTask(null);
   };
 
   const handleUpdateColumn = () => {
@@ -72,13 +52,10 @@ const ColumnContainer = ({ column, onUpdateColumn }: ColumnProps) => {
           );
         })}
       </TaskContainer>
-      <Button onClick={() => setShowTaskModal(true)}>+ Add Task</Button>
-      <TaskModal
-        task={selectedTask}
-        isOpen={showTaskModal}
-        onCancel={handleOnCancel}
-        onSubmit={handleTaskSubmit}
-        isEditMode={isEditingTask}
+      <AddTask
+        taskToEdit={selectedTask}
+        setTaskToEdit={setSelectedTask}
+        listId={id}
       />
     </Container>
   );
