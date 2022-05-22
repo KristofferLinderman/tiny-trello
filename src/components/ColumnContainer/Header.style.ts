@@ -10,6 +10,7 @@ export const Container = styled.div`
   display: flex;
   position: relative;
   justify-content: flex-end;
+  border-bottom: 1px solid #333;
 `;
 
 export const ButtonContainer = styled.div<{ show?: boolean }>`

@@ -11,16 +11,16 @@ type HeaderProps = {
 const Header = ({ title, onUpdateColumn, onRemoveColumn }: HeaderProps) => {
   const [showButtons, toggle] = useToggle(false);
 
-  const handleHoverEnter = () => {
+  const handleMouseEnter = () => {
     toggle();
   };
 
-  const handleHoverLeave = () => {
+  const handleMouseLeave = () => {
     toggle();
   };
 
   return (
-    <Container onMouseEnter={handleHoverEnter} onMouseLeave={handleHoverLeave}>
+    <Container onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <Title>{title}</Title>
       <ButtonContainer show={showButtons}>
         <TinyButton onClick={onUpdateColumn}>✏️</TinyButton>
