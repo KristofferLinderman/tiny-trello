@@ -3,8 +3,9 @@ import { Task, Column } from "../../types";
 import { useBoardContext } from "../../context/BoardContext";
 import { useState } from "react";
 import { TaskModal } from "../TaskModal";
-import { Container, TaskContainer, Title } from "./ColumnContainer.style";
+import { Container, TaskContainer } from "./ColumnContainer.style";
 import { Button } from "../common/Button";
+import { Header } from "./Header";
 
 type ColumnProps = {
   column: Column;
@@ -18,10 +19,6 @@ const ColumnContainer = ({ column, onUpdateColumn }: ColumnProps) => {
 
   const { title, id, tasks } = column;
   const isEditingTask = selectedTask !== null;
-
-  const onRemoveColumn = () => {
-    removeColumn(column.id);
-  };
 
   const onTaskRemove = (taskId: string) => {
     removeTask(taskId, id);
@@ -48,11 +45,21 @@ const ColumnContainer = ({ column, onUpdateColumn }: ColumnProps) => {
     setSelectedTask(null);
   };
 
+  const handleUpdateColumn = () => {
+    onUpdateColumn(column);
+  };
+
+  const handleRemoveColumn = () => {
+    removeColumn(column.id);
+  };
+
   return (
     <Container>
-      <Title>{title}</Title>
-      <Button onClick={onRemoveColumn}>🗑</Button>
-      <Button onClick={() => onUpdateColumn(column)}>✏️</Button>
+      <Header
+        title={title}
+        onUpdateColumn={handleUpdateColumn}
+        onRemoveColumn={handleRemoveColumn}
+      />
       <TaskContainer>
         {tasks.map((task) => {
           return (
