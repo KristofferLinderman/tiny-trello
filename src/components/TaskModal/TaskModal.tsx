@@ -31,6 +31,10 @@ const TaskModal = ({ task, isOpen, onCancel, onSubmit }: TaskModalProps) => {
   }, [task]);
 
   const handleSubmit = () => {
+    if (title === "") {
+      alert("Tasks require a title");
+      return;
+    }
     const newtask: Task = {
       title,
       description,
