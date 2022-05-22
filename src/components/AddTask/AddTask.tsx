@@ -4,6 +4,7 @@ import { useToggle } from "../../hooks/useToggle";
 import { Task } from "../../types";
 import { Button } from "../common/Button";
 import { TaskModal } from "../TaskModal";
+import { Container } from "./AddTask.style";
 
 type AddTaskProps = {
   taskToEdit: Task | null;
@@ -39,7 +40,7 @@ const AddTask = ({ taskToEdit, setTaskToEdit, listId }: AddTaskProps) => {
     }
   };
   return (
-    <div>
+    <Container>
       <Button onClick={toggleModal}>+ Add Task</Button>
       <TaskModal
         task={taskToEdit}
@@ -47,7 +48,7 @@ const AddTask = ({ taskToEdit, setTaskToEdit, listId }: AddTaskProps) => {
         onCancel={handleOnCancel}
         onSubmit={handleTaskSubmit}
       />
-    </div>
+    </Container>
   );
 };
 

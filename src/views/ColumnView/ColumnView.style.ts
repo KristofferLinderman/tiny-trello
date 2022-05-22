@@ -9,6 +9,7 @@ export const Container = styled.div`
 
 export const ComlumnWrapper = styled.div`
   display: flex;
+  overflow-x: scroll;
   > div {
     margin-right: 2rem;
   }

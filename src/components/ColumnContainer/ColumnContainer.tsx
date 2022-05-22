@@ -35,23 +35,25 @@ const ColumnContainer = ({ column, onUpdateColumn }: ColumnProps) => {
 
   return (
     <Container>
-      <Header
-        title={title}
-        onUpdateColumn={handleUpdateColumn}
-        onRemoveColumn={handleRemoveColumn}
-      />
-      <TaskContainer>
-        {tasks.map((task) => {
-          return (
-            <TaskCard
-              key={task.id}
-              task={task}
-              onRemove={onTaskRemove}
-              onUpdate={onTaskUpdate}
-            />
-          );
-        })}
-      </TaskContainer>
+      <div>
+        <Header
+          title={title}
+          onUpdateColumn={handleUpdateColumn}
+          onRemoveColumn={handleRemoveColumn}
+        />
+        <TaskContainer>
+          {tasks.map((task) => {
+            return (
+              <TaskCard
+                key={task.id}
+                task={task}
+                onRemove={onTaskRemove}
+                onUpdate={onTaskUpdate}
+              />
+            );
+          })}
+        </TaskContainer>
+      </div>
       <AddTask
         taskToEdit={selectedTask}
         setTaskToEdit={setSelectedTask}
