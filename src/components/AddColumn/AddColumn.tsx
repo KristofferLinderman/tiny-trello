@@ -6,25 +6,25 @@ import { ColumnModal } from "../ColumnModal";
 import { Button, Container } from "./AddColumn.style";
 
 type AddColumnProps = {
-  selectedColumn: Column | null; // TODO change name to columnToEdit? 🤔
-  setSelectedColumn: (column: Column | null) => void;
+  columnToEdit: Column | null;
+  setColumnToEdit: (column: Column | null) => void;
 };
 
-const AddColumn = ({ selectedColumn, setSelectedColumn }: AddColumnProps) => {
+const AddColumn = ({ columnToEdit, setColumnToEdit }: AddColumnProps) => {
   const { addColumn, updateColumn } = useBoardContext();
   const [showModal, toggleModal] = useToggle();
 
-  const isEditingColumn = selectedColumn !== null;
+  const isEditingColumn = columnToEdit !== null;
 
   useEffect(() => {
-    if (selectedColumn && !showModal) {
+    if (columnToEdit && !showModal) {
       toggleModal();
     }
-  }, [selectedColumn, showModal, toggleModal]);
+  }, [columnToEdit, showModal, toggleModal]);
 
   const handleColumnSubmit = (column: Column) => {
     toggleModal();
-    setSelectedColumn(null);
+    setColumnToEdit(null);
 
     if (isEditingColumn) {
       updateColumn(column);
@@ -35,14 +35,14 @@ const AddColumn = ({ selectedColumn, setSelectedColumn }: AddColumnProps) => {
 
   const handleOnCancel = () => {
     toggleModal();
-    setSelectedColumn(null);
+    setColumnToEdit(null);
   };
 
   return (
     <Container>
       <Button onClick={toggleModal}>+ Add Column</Button>
       <ColumnModal
-        column={selectedColumn}
+        column={columnToEdit}
         isOpen={showModal}
         onCancel={handleOnCancel}
         onSubmit={handleColumnSubmit}

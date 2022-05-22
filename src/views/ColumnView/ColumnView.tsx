@@ -16,8 +16,8 @@ const ColumnView = () => {
   return (
     <Container>
       <AddColumn
-        selectedColumn={selectedColumn}
-        setSelectedColumn={setSelectedColumn}
+        columnToEdit={selectedColumn}
+        setColumnToEdit={setSelectedColumn}
       />
       <ComlumnWrapper>
         {columns.map((column) => {
