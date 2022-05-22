@@ -41,7 +41,9 @@ const Modal = ({
         {children}
         <ButtonContainer>
           <Button onClick={handleOnCancel}>{cancelLabel}</Button>
-          <Button onClick={handleOnSubmit}>{submitLabel}</Button>
+          <Button data-testid="modal-submit-btn" onClick={handleOnSubmit}>
+            {submitLabel}
+          </Button>
         </ButtonContainer>
       </ModalContainer>
     </ModalWrapper>

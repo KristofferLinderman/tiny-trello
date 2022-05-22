@@ -12,6 +12,7 @@ const TextInput = ({ label, onChange, value }: Props) => {
       <label htmlFor={label}>{label}</label>
       <Input
         id={label}
+        data-testid={`${label} input`}
         onChange={(e) => onChange(e.target.value)}
         value={value}
         autoComplete={"off"}
