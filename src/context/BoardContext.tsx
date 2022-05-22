@@ -1,8 +1,23 @@
 import { createContext, useContext, useState } from "react";
 import { BoardContextType, Task, Column } from "../types";
 
+const defaultTasks: Task[] = [
+  {
+    date: new Date(),
+    description: "description",
+    title: "Default task 1",
+    id: "0",
+  },
+  {
+    date: new Date(),
+    description: "description",
+    title: "Default task 2",
+    id: "1",
+  },
+];
+
 const defaultColumns: Column[] = [
-  { title: "Todo", id: "0", tasks: [] },
+  { title: "Todo", id: "0", tasks: defaultTasks },
   { title: "In Progress", id: "1", tasks: [] },
   { title: "Done", id: "2", tasks: [] },
 ];
