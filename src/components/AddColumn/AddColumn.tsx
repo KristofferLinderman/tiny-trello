@@ -3,7 +3,8 @@ import { useBoardContext } from "../../context/BoardContext";
 import { useToggle } from "../../hooks/useToggle";
 import { Column } from "../../types";
 import { ColumnModal } from "../ColumnModal";
-import { Button, Container } from "./AddColumn.style";
+import { Button } from "../common/Button";
+import { Container } from "./AddColumn.style";
 
 type AddColumnProps = {
   columnToEdit: Column | null;

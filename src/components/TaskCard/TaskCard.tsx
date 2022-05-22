@@ -1,10 +1,6 @@
 import { Task } from "../../types";
-import {
-  ButtonContainer,
-  Container,
-  TinyButton,
-  Title,
-} from "./TaskCard.style";
+import { TinyButton } from "../common/Button";
+import { ButtonContainer, Container, Title } from "./TaskCard.style";
 
 type TaskCardProps = {
   task: Task;

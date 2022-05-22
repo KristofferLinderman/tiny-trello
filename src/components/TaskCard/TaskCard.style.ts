@@ -18,10 +18,3 @@ export const ButtonContainer = styled.div`
     margin-left: 0.5rem;
   }
 `;
-
-export const TinyButton = styled.button`
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 5px;
-  cursor: pointer;
-`;

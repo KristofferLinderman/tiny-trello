@@ -4,6 +4,7 @@ import { useBoardContext } from "../../context/BoardContext";
 import { useState } from "react";
 import { TaskModal } from "../TaskModal";
 import { Container, TaskContainer, Title } from "./ColumnContainer.style";
+import { Button } from "../common/Button";
 
 type ColumnProps = {
   column: Column;
@@ -50,8 +51,8 @@ const ColumnContainer = ({ column, onUpdateColumn }: ColumnProps) => {
   return (
     <Container>
       <Title>{title}</Title>
-      <button onClick={onRemoveColumn}>🗑</button>
-      <button onClick={() => onUpdateColumn(column)}>✏️</button>
+      <Button onClick={onRemoveColumn}>🗑</Button>
+      <Button onClick={() => onUpdateColumn(column)}>✏️</Button>
       <TaskContainer>
         {tasks.map((task) => {
           return (
@@ -64,7 +65,7 @@ const ColumnContainer = ({ column, onUpdateColumn }: ColumnProps) => {
           );
         })}
       </TaskContainer>
-      <button onClick={() => setShowTaskModal(true)}>+ Add Task</button>
+      <Button onClick={() => setShowTaskModal(true)}>+ Add Task</Button>
       <TaskModal
         task={selectedTask}
         isOpen={showTaskModal}
