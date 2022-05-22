@@ -4,6 +4,8 @@ import { ColumnView } from "./views/ColumnView";
 
 const Container = styled.div`
   padding: 2rem;
+  box-sizing: border-box;
+  height: 100vh;
 `;
 
 const App = () => {

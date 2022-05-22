@@ -11,12 +11,15 @@ export const Container = styled.div`
   max-width: 300px;
   height: 80vh;
   box-sizing: border-box;
+  box-shadow: rgb(0 0 0 / 20%) 0 0 10px 0px;
+  margin: 1rem;
 `;
 
 export const TaskContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 1rem;
+
   > div {
     margin-bottom: 1rem;
   }

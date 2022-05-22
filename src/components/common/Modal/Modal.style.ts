@@ -8,6 +8,7 @@ export const ModalWrapper = styled.div`
   left: 0;
   background-color: rgba(0, 0, 0, 0.7);
   cursor: auto;
+  z-index: 1337;
 `;
 
 export const ModalContainer = styled.div`
