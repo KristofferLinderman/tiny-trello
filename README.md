@@ -3,7 +3,7 @@
 Tiny Trello is a small Kanban board that allows you to create/delete Columns and Tasks to help manage your work better.
 
 ## Tech-stuff
-Tiny Trello is built using React with TypeScript and uses Styled Components to make it look pretty 💄.
+Tiny Trello is built using React with TypeScript and uses Styled Components to make it look pretty 💄. The app loads with some Dummy data to give an overview of the UI, as there isn't any persistance of the state any/all changes go 💨. upon a page-refresh.
 
 Tests are written using Jest + Testing Library. Currently only one Component has unit tests written for it. This is obviously not desirable, but was a decision made to save time in the development process while still showing some fundamental understanding of how to write unit tests.
 
