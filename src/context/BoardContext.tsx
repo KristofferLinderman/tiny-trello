@@ -30,6 +30,7 @@ const defaultValue: BoardContextType = {
   addTask: (task: Task, columnId: string) => {},
   updateTask: (task: Task, columnId: string) => {},
   removeTask: (taskId: string, columnId: string) => {},
+  moveTask: (taskId: string, orgColumnId: string, targetColumnId: string) => {},
 };
 
 const BoardContext = createContext<BoardContextType>(defaultValue);
@@ -113,6 +114,23 @@ const BoardProvider = ({ children }: ProviderProps) => {
     setColumns(newColumns);
   };
 
+  const moveTask = (
+    taskId: string,
+    orgColumnId: string,
+    targetColumnId: string
+  ) => {
+    columns.map((column) => {
+      if (column.id === orgColumnId) {
+        column.tasks.map((_task) => {
+          if (_task.id === taskId) {
+            removeTask(taskId, orgColumnId);
+            addTask(_task, targetColumnId);
+          }
+        });
+      }
+    });
+  };
+
   return (
     <BoardContext.Provider
       value={{
@@ -123,6 +141,7 @@ const BoardProvider = ({ children }: ProviderProps) => {
         addTask,
         updateTask,
         removeTask,
+        moveTask,
       }}
     >
       {children}

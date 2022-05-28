@@ -1,7 +1,7 @@
 import { TaskCard } from "../TaskCard/TaskCard";
 import { Task, Column } from "../../types";
 import { useBoardContext } from "../../context/BoardContext";
-import { useState } from "react";
+import { DragEvent, useState } from "react";
 import { Container, TaskContainer } from "./ColumnContainer.style";
 import { Header } from "./Header";
 import { AddTask } from "../AddTask";
@@ -13,7 +13,7 @@ type ColumnProps = {
 
 const ColumnContainer = ({ column, onUpdateColumn }: ColumnProps) => {
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
-  const { removeTask, removeColumn } = useBoardContext();
+  const { removeTask, removeColumn, moveTask } = useBoardContext();
 
   const { title, id, tasks } = column;
 
@@ -33,8 +33,21 @@ const ColumnContainer = ({ column, onUpdateColumn }: ColumnProps) => {
     removeColumn(column.id);
   };
 
+  const drop = (e: DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+
+    const taskId = e.dataTransfer.getData("taskId");
+    const orgColumnId = e.dataTransfer.getData("orgColumnId");
+
+    moveTask(taskId, orgColumnId, id);
+  };
+
+  const dragOver = (e: DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+  };
+
   return (
-    <Container>
+    <Container onDrop={drop} onDragOver={dragOver}>
       <div>
         <Header
           title={title}
@@ -47,6 +60,7 @@ const ColumnContainer = ({ column, onUpdateColumn }: ColumnProps) => {
               <TaskCard
                 key={task.id}
                 task={task}
+                columnId={id}
                 onRemove={onTaskRemove}
                 onUpdate={onTaskUpdate}
               />

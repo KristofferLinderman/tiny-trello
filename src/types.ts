@@ -21,4 +21,9 @@ export type BoardContextType = {
   addTask: (task: Task, columnId: string) => void;
   updateTask: (task: Task, columnId: string) => void;
   removeTask: (taskId: string, columnId: string) => void;
+  moveTask: (
+    taskId: string,
+    orgColumnId: string,
+    targetColumnId: string
+  ) => void;
 };
