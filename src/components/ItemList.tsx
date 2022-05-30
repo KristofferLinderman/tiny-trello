@@ -2,7 +2,7 @@ import { ItemCard } from "./ItemCard";
 import styled from "styled-components";
 import AddItem from "./AddItem";
 import { Item, List } from "../types";
-import { useBoardContext } from "../context/BoardContext";
+// import { useBoardContext } from "../context/BoardContext";
 
 const Container = styled.div`
   display: flex;
@@ -31,33 +31,33 @@ type ItemListProps = {
 };
 
 const ItemList = ({ list }: ItemListProps) => {
-  const { addItem, removeItem, updateItem, removeList, updateList } =
-    useBoardContext();
+  // const { addItem, removeItem, updateItem, removeList, updateList } =
+  //   useBoardContext();
   const { title, id, items } = list;
 
   const onRemoveList = () => {
-    removeList(list.id);
+    // removeList(list.id);
   };
 
   const onUpdateList = () => {
-    const newList = list;
-    newList.title = "Panda list";
-    updateList(newList);
+    // const newList = list;
+    // newList.title = "Panda list";
+    // updateList(newList);
   };
 
   const onItemAdd = (item: Item) => {
-    console.log("🐼 - Adding ", item);
-    addItem(item, id);
+    // console.log("🐼 - Adding ", item);
+    // addItem(item, id);
   };
 
   const onItemRemove = (itemId: string) => {
-    console.log("🐼 - onItemRemove ", itemId);
-    removeItem(itemId, id);
+    // console.log("🐼 - onItemRemove ", itemId);
+    // removeItem(itemId, id);
   };
 
   const onItemUpdate = (item: Item) => {
-    console.log("🐼 - onItemRemove ", item);
-    updateItem(item, id);
+    // console.log("🐼 - onItemRemove ", item);
+    // updateItem(item, id);
   };
 
   return (
