@@ -39,10 +39,9 @@ export type RemoveItem = {
   payload: { itemId: string; listId: string };
 };
 
-export type BoardActions =
-  | AddList
-  | UpdateList
-  | RemoveList
-  | AddItem
-  | UpdateItem
-  | RemoveItem;
+export type BoardActions = AddList;
+// | UpdateList
+// | RemoveList
+// | AddItem
+// | UpdateItem
+// | RemoveItem;

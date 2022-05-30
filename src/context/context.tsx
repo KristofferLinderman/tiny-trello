@@ -20,14 +20,14 @@ type ProviderProps = {
   children?: React.ReactNode;
 };
 
-const ttt = {};
-
 const BoardProvider = ({ children }: ProviderProps) => {
   const [state, dispatch] = useReducer(boardReducer, initialState);
 
   return (
-    <BoardContext.Provider value={state}>{children}</BoardContext.Provider>
+    <BoardContext.Provider value={{ state, dispatch }}>
+      {children}
+    </BoardContext.Provider>
   );
 };
 
-export { useBoardContext, BoardProvider };
+export { useBoardContext, BoardContext, BoardProvider };

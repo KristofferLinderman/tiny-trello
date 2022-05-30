@@ -8,16 +8,16 @@ const boardReducer = (state: BoardState, action: BoardActions) => {
         ...state,
         [action.payload.id]: action.payload,
       };
-    case ActionType.UPDATE_LIST:
-      return;
-    case ActionType.REMOVE_LIST:
-      return;
-    case ActionType.ADD_ITEM:
-      return;
-    case ActionType.UPDATE_ITEM:
-      return;
-    case ActionType.REMOVE_ITEM:
-      return;
+    // case ActionType.UPDATE_LIST:
+    //   return;
+    // case ActionType.REMOVE_LIST:
+    //   return;
+    // case ActionType.ADD_ITEM:
+    //   return;
+    // case ActionType.UPDATE_ITEM:
+    //   return;
+    // case ActionType.REMOVE_ITEM:
+    //   return;
 
     default:
       return state;
